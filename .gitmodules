@@ -1,0 +1,4 @@
+[submodule "Code/android/core"]
+	path = Code/android/core
+	url = https://github.com/ukanth/afwall
+	branch = master
