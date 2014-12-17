@@ -8,9 +8,19 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="john.frontzos.earlywarningsystem.MainActivity$PlaceholderFragment" >
 
-    <TextView
+    <Switch
+        android:id="@+id/swLogger"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:text="Enable Logging" />
+
+    <Button
+        android:id="@+id/bStartFirewall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="Start Firewall" />
 
 </RelativeLayout>

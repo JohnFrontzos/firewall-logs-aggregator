@@ -3,13 +3,19 @@ package john.frontzos.earlywarningsystem;
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Switch;
 import android.os.Build;
+
+import dev.ukanth.ufirewall.MainActivity.GetAppList;
 
 public class MainActivity extends Activity {
 
@@ -55,7 +61,23 @@ public class MainActivity extends Activity {
 				Bundle savedInstanceState) {
 			View rootView = inflater.inflate(R.layout.fragment_main, container,
 					false);
-			return rootView;
+			return initView(rootView);
 		}
 	}
+	
+	
+	private static View initView(View view){
+	    Switch enableLogger=(Switch)view.findViewById(R.id.swLogger);
+	    Button startFirewall=(Button)view.findViewById(R.id.bStartFirewall);
+	    startFirewall.setOnClickListener(new OnClickListener() {
+            
+            @Override
+            public void onClick(View arg0) {
+              //Intent startFw=new Intent(this, dev.ukanth.ufirewall.MainActivity.class);
+              
+            }
+        });
+	    return view;
+	}
+	
 }
