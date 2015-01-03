@@ -19,5 +19,5 @@ App Basic Schema
 ![Alt text][UML]
 
 
-[UML]:/Design/Engineering/Early Warning System.png "UML schema"
+[UML]:https://bitbucket.org/repo/bgL9j6/images/861665347-Early%20Warning%20System.png "UML schema"
 [AFWall+]:https://github.com/ukanth/afwall
