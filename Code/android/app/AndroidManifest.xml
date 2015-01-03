@@ -40,6 +40,8 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <!-- Allows ufwall to access information about networks -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <!-- Allows ufwall to change network connectivity state -->
     <!-- <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" /> -->
     <!-- Allows low-level access to power management -->
@@ -235,11 +237,7 @@
                 <action android:name="com.twofortyfouram.locale.intent.action.FIRE_SETTING" />
             </intent-filter>
         </receiver>
-        
-        
-        
-        
-        
+
         <service android:name="dev.ukanth.ufirewall.RootShell" />
         <service android:name="dev.ukanth.ufirewall.NflogService" />
         <service android:name="dev.ukanth.ufirewall.log.LogService" />
