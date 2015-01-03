@@ -7,10 +7,11 @@ TODO
 
 * Analyze and Create custom scripts for IPTABLES rules
 * ~~Submodule the AFWall~~
-* Check the log file's implemation of AFWALL+ 
+* ~~Check the log file's implemation of AFWALL+ ~~
 * Create a plugin for capturing the entries of the log file
 * Calculate the data that PROTOS server needs
-* Create backend's REST API and client's send process
+* REST client side communication
+* [optional] Create backend's REST API
 
 
 [AFWall+]:https://github.com/ukanth/afwall
