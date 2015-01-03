@@ -3,7 +3,7 @@ Early Warning Malware Detection project for Android
 
 Based on [AFWall+] project, the early warning malware detection system, is a under-graduate android project that collects data from AFWall's log file. The result of some calculations based on the the firewall's entries is sending to PROTOS project that creates malware trends statistics. 
 
-TODO 
+## TODO  
 
 * Analyze and Create custom scripts for IPTABLES rules
 * ~~Submodule the AFWall~~
@@ -14,10 +14,9 @@ TODO
 * [optional] Create backend's REST API
 
 
-App Basic Schema 
+## App Basic Schema  
 
 ![Alt text][UML]
 
-
-[UML]:/Design/Engineering/Early Warning System.png "UML schema"
+[UML]:https://bitbucket.org/repo/bgL9j6/images/861665347-Early%20Warning%20System.png "UML schema"
 [AFWall+]:https://github.com/ukanth/afwall
