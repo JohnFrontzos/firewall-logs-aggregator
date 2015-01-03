@@ -14,4 +14,10 @@ TODO
 * [optional] Create backend's REST API
 
 
+App Basic Schema 
+
+![Alt text][UML]
+
+
+[UML]:/Design/Engineering/Early Warning System.png "UML schema"
 [AFWall+]:https://github.com/ukanth/afwall
