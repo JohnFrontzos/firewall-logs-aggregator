@@ -63,7 +63,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name">
         <activity
-            android:name="dev.ukanth.ufirewall.MainActivity"
+            android:name="john.frontzos.earlywarningsystem.ui.MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize|keyboard|locale|screenLayout"
             android:hardwareAccelerated="true"
             android:label="@string/app_name" >
@@ -84,6 +84,13 @@
         </activity>
 
         <!-- AFWall manifest -->
+        <!--<activity-->
+            <!--android:name="dev.ukanth.ufirewall.MainActivity"-->
+            <!--android:configChanges="orientation|keyboardHidden|screenSize|keyboard|locale|screenLayout"-->
+            <!--android:hardwareAccelerated="true">-->
+        <!--</activity>-->
+
+
          <activity
             android:name="dev.ukanth.ufirewall.preferences.PreferencesActivity"
             android:configChanges="orientation|keyboardHidden|screenSize|locale|screenLayout"
