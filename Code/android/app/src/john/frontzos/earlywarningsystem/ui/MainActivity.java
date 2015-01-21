@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Switch;
 
+import dev.ukanth.ufirewall.LogActivity;
 import john.frontzos.earlywarningsystem.R;
 
 public class MainActivity extends Activity implements MainFragment.Callback{
@@ -33,8 +34,14 @@ public class MainActivity extends Activity implements MainFragment.Callback{
 
 
     @Override
-    public void onButtonPressed() {
-        Intent fwActivity = new Intent(this, dev.ukanth.ufirewall.MainActivity.class);
-        startActivity(fwActivity);
+    public void onOpenFirewallButtonPressed() {
+        Intent activity = new Intent(this, dev.ukanth.ufirewall.MainActivity.class);
+        startActivity(activity);
+    }
+
+    @Override
+    public void onOpenLogsButtonPressed() {
+        Intent activity = new Intent(this, LogActivity.class);
+        startActivity(activity);
     }
 }

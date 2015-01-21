@@ -8,20 +8,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
+import dev.ukanth.ufirewall.Api;
 import john.frontzos.earlywarningsystem.R;
 import timber.log.Timber;
 
 /**
  * @author Ioannis Frontzos
  * @version 1.0.0
- * @since 06/01/2015
+ * @since 21/01/2015
  */
 public class MainFragment extends Fragment{
-    @InjectView(R.id.switch_logger) Switch enableLoggerSwitch;
+    @InjectView(R.id.button_logs) Button getLogs;
+    @InjectView(R.id.switch_enable_firewall) Switch enableFirewall;
     @InjectView(R.id.button_startFirewall)  Button startFirewall;
 
     private Callback mCallback;
@@ -44,14 +48,28 @@ public class MainFragment extends Fragment{
         View view = inflater.inflate(R.layout.fragment_main, container, false);
         ButterKnife.inject(this, view);
         setHasOptionsMenu(true);
+        enableFirewall.setChecked(Api.isEnabled(getActivity()));
         return view;
     }
 
     @OnClick(R.id.button_startFirewall)
     void onStartFirewall(){
-        mCallback.onButtonPressed();
+        mCallback.onOpenFirewallButtonPressed();
 
     }
+
+
+    @OnClick(R.id.button_logs)
+    void onOpenLogs(){
+        mCallback.onOpenLogsButtonPressed();
+
+    }
+
+    @OnCheckedChanged(R.id.switch_enable_firewall)
+    void onChecked(boolean checked) {
+            Api.setEnabled(getActivity(), checked,true);
+    }
+
 
     @Override
     public void onAttach(Activity activity) {
@@ -64,7 +82,9 @@ public class MainFragment extends Fragment{
         }
 
     public interface Callback {
-        public void onButtonPressed();
+        public void onOpenFirewallButtonPressed();
+        public void onOpenLogsButtonPressed();
+
     }
 
 }
