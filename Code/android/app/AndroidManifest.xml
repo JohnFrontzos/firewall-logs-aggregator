@@ -57,13 +57,15 @@
     <uses-permission android:name="android.permission.ACCESS_SUPERUSER" />
     <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
 
+    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
     <application
         android:name="dev.ukanth.ufirewall.G"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name">
+        android:label="@string/app_name" >
         <activity
-            android:name="john.frontzos.earlywarningsystem.ui.MainActivity"
+            android:name=".ui.MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize|keyboard|locale|screenLayout"
             android:hardwareAccelerated="true"
             android:label="@string/app_name" >
@@ -84,14 +86,13 @@
         </activity>
 
         <!-- AFWall manifest -->
-        <!--<activity-->
-            <!--android:name="dev.ukanth.ufirewall.MainActivity"-->
-            <!--android:configChanges="orientation|keyboardHidden|screenSize|keyboard|locale|screenLayout"-->
-            <!--android:hardwareAccelerated="true">-->
-        <!--</activity>-->
+        <!-- <activity -->
+        <!-- android:name="dev.ukanth.ufirewall.MainActivity" -->
+        <!-- android:configChanges="orientation|keyboardHidden|screenSize|keyboard|locale|screenLayout" -->
+        <!-- android:hardwareAccelerated="true"> -->
+        <!-- </activity> -->
 
-
-         <activity
+        <activity
             android:name="dev.ukanth.ufirewall.preferences.PreferencesActivity"
             android:configChanges="orientation|keyboardHidden|screenSize|locale|screenLayout"
             android:hardwareAccelerated="true"
@@ -103,13 +104,11 @@
             android:hardwareAccelerated="true"
             android:theme="@style/Theme.Sherlock" >
         </activity>
-        <activity android:name="dev.ukanth.ufirewall.RulesActivity"></activity>
-        <activity android:name="dev.ukanth.ufirewall.AppDetailActivity"></activity>
-        <activity android:name="dev.ukanth.ufirewall.LogActivity"></activity>
-        
-        <activity android:name="dev.ukanth.ufirewall.AlertDialogActivity"></activity>
-            
-        <activity 
+        <activity android:name="dev.ukanth.ufirewall.RulesActivity" />
+        <activity android:name="dev.ukanth.ufirewall.AppDetailActivity" />
+        <activity android:name="dev.ukanth.ufirewall.LogActivity" />
+        <activity android:name="dev.ukanth.ufirewall.AlertDialogActivity" />
+        <activity
             android:name="dev.ukanth.ufirewall.widget.ToggleWidgetActivity"
             android:launchMode="singleInstance"
             android:theme="@style/Theme.Transparent" >
@@ -117,25 +116,23 @@
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
             </intent-filter>
         </activity>
-        
-        <activity android:name="dev.ukanth.ufirewall.widget.ToggleWidgetOldActivity" 
-             android:launchMode="singleInstance"
-             android:theme="@style/Theme.Transparent" >
+        <activity
+            android:name="dev.ukanth.ufirewall.widget.ToggleWidgetOldActivity"
+            android:launchMode="singleInstance"
+            android:theme="@style/Theme.Transparent" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
             </intent-filter>
         </activity>
-        
         <activity android:name="dev.ukanth.ufirewall.CustomScriptActivity" />
-        
+
         <receiver android:name="dev.ukanth.ufirewall.BootBroadcast" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.QUICKBOOT_POWERON" />
                 <action android:name="android.intent.action.MEDIA_MOUNTED" />
-              </intent-filter>
+            </intent-filter>
         </receiver>
-
         <receiver android:name="dev.ukanth.ufirewall.PackageBroadcast" >
             <intent-filter>
                 <action android:name="android.intent.action.PACKAGE_ADDED" />
@@ -144,19 +141,16 @@
                 <data android:scheme="package" />
             </intent-filter>
         </receiver>
-        
-        
         <receiver android:name="dev.ukanth.ufirewall.ConnectivityChangeReceiver" >
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
-                 <action android:name="android.net.wifi.WIFI_AP_STATE_CHANGED" />
+                <action android:name="android.net.wifi.WIFI_AP_STATE_CHANGED" />
             </intent-filter>
         </receiver>
-        
-         <receiver 
-             android:name="dev.ukanth.ufirewall.StatusWidget" 
-             android:label="@string/widget_label_status"
-             android:icon="@drawable/on_off_widget">
+        <receiver
+            android:name="dev.ukanth.ufirewall.StatusWidget"
+            android:icon="@drawable/on_off_widget"
+            android:label="@string/widget_label_status" >
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/onoff_widget" />
@@ -167,10 +161,10 @@
                 <action android:name="dev.ukanth.ufirewall.intent.action.TOGGLE_REQUEST" />
             </intent-filter>
         </receiver>
-         <receiver 
-             android:name="dev.ukanth.ufirewall.widget.ToggleWidget" 
-             android:label="@string/widget_label_settings"
-             android:icon="@drawable/question">
+        <receiver
+            android:name="dev.ukanth.ufirewall.widget.ToggleWidget"
+            android:icon="@drawable/question"
+            android:label="@string/widget_label_settings" >
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/toggle_widget" />
@@ -181,9 +175,9 @@
                 <action android:name="dev.ukanth.ufirewall.intent.action.TOGGLE_REQUEST" />
             </intent-filter>
         </receiver>
-        
-         
-         <receiver android:name="dev.ukanth.ufirewall.widget.ToggleWidgetOld" android:label="@string/widget_label_settings_old">
+        <receiver
+            android:name="dev.ukanth.ufirewall.widget.ToggleWidgetOld"
+            android:label="@string/widget_label_settings_old" >
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/toggle_widget_old" />
@@ -194,14 +188,12 @@
                 <action android:name="dev.ukanth.ufirewall.intent.action.TOGGLE_REQUEST" />
             </intent-filter>
         </receiver>
-        
-         
 
         <activity
-		    android:name="com.haibison.android.lockpattern.LockPatternActivity"
-		    android:configChanges="orientation|screenSize|keyboard|keyboardHidden"
-    		android:screenOrientation="user"
-		    android:theme="@style/Alp.42447968.Theme.Dark" />
+            android:name="com.haibison.android.lockpattern.LockPatternActivity"
+            android:configChanges="orientation|screenSize|keyboard|keyboardHidden"
+            android:screenOrientation="user"
+            android:theme="@style/Alp.42447968.Theme.Dark" />
 
         <!-- device admin -->
         <!-- This is required this receiver to become device admin component. -->
@@ -209,19 +201,22 @@
         <receiver
             android:name="dev.ukanth.ufirewall.admin.AdminDeviceReceiver"
             android:permission="android.permission.BIND_DEVICE_ADMIN" >
-            <meta-data android:name="android.app.device_admin" android:resource="@xml/device_admin"/>
+            <meta-data
+                android:name="android.app.device_admin"
+                android:resource="@xml/device_admin" />
+
             <intent-filter>
+
                 <!-- This action is required -->
                 <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
                 <action android:name="android.app.action.ACTION_DEVICE_ADMIN_DISABLE_REQUESTED" />
                 <action android:name="android.app.action.ACTION_DEVICE_ADMIN_DISABLED" />
-		        <action android:name="android.app.action.DEVICE_ADMIN_DISABLED" />
+                <action android:name="android.app.action.DEVICE_ADMIN_DISABLED" />
             </intent-filter>
         </receiver>
-        
-        
+
         <!-- Tasker/Locale Plugin -->
-        
+
         <activity
             android:name="dev.ukanth.ufirewall.plugin.LocaleEdit"
             android:exported="true"
@@ -229,16 +224,18 @@
             android:label="@string/tasker_lable"
             android:theme="@style/Theme.Locale.Dark"
             android:uiOptions="splitActionBarWhenNarrow"
-            android:windowSoftInputMode="adjustResize">
+            android:windowSoftInputMode="adjustResize" >
+
             <!-- this Intent filter allows the plug-in to be discovered by Locale -->
             <intent-filter>
                 <action android:name="com.twofortyfouram.locale.intent.action.EDIT_SETTING" />
             </intent-filter>
         </activity>
-        
+
         <receiver
             android:name="dev.ukanth.ufirewall.plugin.FireReceiver"
-            android:exported="true">
+            android:exported="true" >
+
             <!-- this Intent filter allows the plug-in to discovered by Locale -->
             <intent-filter>
                 <action android:name="com.twofortyfouram.locale.intent.action.FIRE_SETTING" />
@@ -248,6 +245,15 @@
         <service android:name="dev.ukanth.ufirewall.RootShell" />
         <service android:name="dev.ukanth.ufirewall.NflogService" />
         <service android:name="dev.ukanth.ufirewall.log.LogService" />
+
+        <activity
+            android:name=".ui.ChartActivity"
+            android:label="@string/title_activity_chart"
+            android:parentActivityName=".ui.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="john.frontzos.earlywarningsystem.ui.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
