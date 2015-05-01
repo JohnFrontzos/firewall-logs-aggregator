@@ -15,6 +15,7 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import butterknife.ButterKnife;
 import john.frontzos.earlywarningsystem.R;
@@ -28,15 +29,10 @@ import john.frontzos.earlywarningsystem.R;
  * create an instance of this fragment.
  */
 public class ChartFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
     public static final String ARG_SECTION_NUMBER = "section_number";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private int mParam1;
 
     private OnRefreshData mListener;
 
@@ -47,15 +43,13 @@ public class ChartFragment extends Fragment {
      * this fragment using the provided parameters.
      *
      * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment ChartFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ChartFragment newInstance(String param1, String param2) {
+    public static ChartFragment newInstance(int param1) {
         ChartFragment fragment = new ChartFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putInt(ARG_SECTION_NUMBER, param1);
         fragment.setArguments(args);
         return fragment;
     }
@@ -68,8 +62,7 @@ public class ChartFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            mParam1 = getArguments().getInt(ARG_SECTION_NUMBER);
         }
     }
 
@@ -79,7 +72,7 @@ public class ChartFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_chart, container, false);
         ButterKnife.inject(this, view);
         chart = (LineChart) view.findViewById(R.id.chart);
-        setDummyDataToChart();
+        setDummyDataToChart(mParam1);
         return view;
     }
 
@@ -107,15 +100,8 @@ public class ChartFragment extends Fragment {
 
     /** Let's try to make a chart with dummy data. */
 
-    private void setDummyDataToChart(){
-        ArrayList<Entry> values = new ArrayList<Entry>();
-
-        values.add(new Entry(40, 0));
-        values.add(new Entry(80, 1));
-        values.add(new Entry(300, 2));
-        values.add(new Entry(310, 3));
-        values.add(new Entry(340, 4));
-        LineDataSet data = new LineDataSet(values, "Apps");
+    private void setDummyDataToChart(int fragmentNumber){
+        LineDataSet data = new LineDataSet(generateData(fragmentNumber), "Apps");
         ArrayList<String> xVals= new ArrayList<String>();
         xVals.add("0");
         xVals.add("1");
@@ -130,8 +116,16 @@ public class ChartFragment extends Fragment {
     private void styleChart(){
         chart.fitScreen();
 
+    }
 
-
+    private  ArrayList<Entry> generateData(int i){
+        ArrayList<Entry>values = new ArrayList<Entry>();
+        values.add(new Entry(new Random(Long.valueOf(i)).nextInt(1000),0));
+        values.add(new Entry(80, 1));
+        values.add(new Entry(300, 2));
+        values.add(new Entry(310, 3));
+        values.add(new Entry(340, 4));
+        return values;
     }
 
 }
