@@ -10,6 +10,7 @@ Based on [AFWall+] project, the early warning malware detection system, is a und
 * ~~Check the log file's implemation of AFWALL+ ~~
 * ~~Create a plugin for capturing the entries of the log file~~
 * Calculate the data that PROTOS server needs
+* Write Documentation
 * [optional] REST client side communication
 
 
