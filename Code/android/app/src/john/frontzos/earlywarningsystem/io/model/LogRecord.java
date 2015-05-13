@@ -2,23 +2,29 @@ package john.frontzos.earlywarningsystem.io.model;
 
 import java.util.List;
 
+import io.realm.RealmList;
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+
 /**
  * @author Ioannis Frontzos
  * @version 1.0.0
  * @since 18/04/2015
  */
-public class LogRecord {
+public class LogRecord extends RealmObject{
     private String name;
+
+    @PrimaryKey
     private int appID;
-    private List<String> destination;
+    private RealmList<IpAddress> destination;
     private long totalPackages;
-    private String source;
+    private IpAddress source;
 
 
     public LogRecord() {
     }
 
-    public LogRecord(String name, int appID, List<String> destination, long totalPackages, String source) {
+    public LogRecord(String name, int appID, RealmList<IpAddress> destination, long totalPackages, IpAddress source) {
         this.name = name;
         this.appID = appID;
         this.destination = destination;
@@ -42,11 +48,11 @@ public class LogRecord {
         this.appID = appID;
     }
 
-    public List<String> getDestination() {
+    public RealmList<IpAddress> getDestination() {
         return destination;
     }
 
-    public void setDestination(List<String> destination) {
+    public void setDestination(RealmList<IpAddress> destination) {
         this.destination = destination;
     }
 
@@ -58,11 +64,11 @@ public class LogRecord {
         this.totalPackages = totalPackages;
     }
 
-    public String getSource() {
+    public IpAddress getSource() {
         return source;
     }
 
-    public void setSource(String source) {
+    public void setSource(IpAddress source) {
         this.source = source;
     }
 }

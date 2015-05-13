@@ -17,8 +17,11 @@ import dev.ukanth.ufirewall.G;
 import dev.ukanth.ufirewall.NflogService;
 import dev.ukanth.ufirewall.RootShell;
 import dev.ukanth.ufirewall.log.LogInfo;
+import io.realm.RealmList;
 import john.frontzos.earlywarningsystem.events.LogDataEvent;
+import john.frontzos.earlywarningsystem.io.model.IpAddress;
 import john.frontzos.earlywarningsystem.io.model.LogRecord;
+import timber.log.Timber;
 
 /**
  * @author Ioannis Frontzos
@@ -73,12 +76,12 @@ public class LogFileAccess {
 
     }
 
-    public List<LogRecord> parseLogDataFromFirewall(String data) {
-        List<LogRecord> list = new ArrayList<LogRecord>();
+    public RealmList<LogRecord> parseLogDataFromFirewall(String data) {
+        RealmList<LogRecord> list = new RealmList<LogRecord>();
         final BufferedReader r = new BufferedReader(new StringReader(data.toString()));
         String line;
         LogRecord record = new LogRecord();
-        ArrayList<String> dst = new ArrayList<String>();
+        RealmList<IpAddress> dst = new RealmList<IpAddress>();
         int start, end;
         try {
             while ((line = r.readLine()) != null) {
@@ -93,10 +96,10 @@ public class LogFileAccess {
                 } else if ((start = line.indexOf("Total Packets Blocked")) != -1) {
                     record.setTotalPackages(Long.parseLong(line.substring(start + 23)));
                 } else if (((start = line.indexOf("[TCP]")) != -1) && ((end = line.indexOf(")", start)) != -1)) {
-                    dst.add(line.substring(start + 5, end - 3));
+                    dst.add(new IpAddress(line.substring(start + 5, end - 3)));
                 } else if (line.contains("---------")) {
-                    if (TextUtils.isEmpty(record.getSource())) {
-                        record.setSource("localhost");
+                    if (record.getSource()!=null && TextUtils.isEmpty(record.getSource().getIp())) {
+                        record.setSource(new IpAddress("localhost"));
                     }
                     record.setDestination(dst);
                     list.add(record);
@@ -104,7 +107,8 @@ public class LogFileAccess {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            Timber.e(e, "Error parsing logs");
+            //e.printStackTrace();
         }
 
         return list;
