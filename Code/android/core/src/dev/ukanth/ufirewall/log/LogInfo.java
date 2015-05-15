@@ -29,6 +29,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.StringReader;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -59,7 +60,6 @@ public class LogInfo {
 		this.dstBlocked = new HashMap<String, Integer>();
 	}
 
-	
 	public static String parseLog(Context ctx, String dmesg) {
 		
 		final BufferedReader r = new BufferedReader(new StringReader(dmesg.toString()));
@@ -255,7 +255,6 @@ public class LogInfo {
 		}
 		
 	}
-	
 
 	public static String parseLogs(String result,final Context ctx) {
 
@@ -355,7 +354,6 @@ public class LogInfo {
 		return address.toString();
 	}
 
-
     protected static void writeToFile(Context context, String data){
         File myFile = new File("/storage/sdcard0/"+"logs");
         try {
@@ -372,5 +370,7 @@ public class LogInfo {
         }
 
     }
+
+
 
 }

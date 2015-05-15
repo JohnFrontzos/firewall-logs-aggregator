@@ -6,36 +6,51 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="john.frontzos.earlywarningsystem.ui.MainActivity$PlaceholderFragment" >
+    tools:context="john.frontzos.earlywarningsystem.ui.MainActivity$PlaceholderFragment">
 
     <Switch
         android:id="@+id/switch_enable_firewall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Enable Firewall"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:text="Enable Firewall" />
 
+
+    <Button
+        android:id="@+id/button_parse_logs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/linearlayout_panel"
+        android:text="Parse Logs" />
 
     <LinearLayout
+        android:id="@+id/linearlayout_panel"
         android:layout_width="match_parent"
-        android:layout_alignParentBottom="true"
-        android:layout_height="wrap_content">
-
-    <Button
-        android:id="@+id/button_startFirewall"
-        android:layout_width="0dp"
-        android:layout_weight="0.5"
         android:layout_height="wrap_content"
-        android:text="Open Firewall" />
+        android:layout_alignParentBottom="true">
 
-    <Button
-        android:id="@+id/button_logs"
-        android:layout_width="0dp"
-        android:layout_weight="0.5"
-        android:layout_height="wrap_content"
-        android:text="Log File" />
+        <Button
+            android:id="@+id/button_startFirewall"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:text="Firewall" />
 
+        <Button
+            android:id="@+id/button_logs"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:text="Log File" />
+
+        <Button
+            android:id="@+id/button_chart"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:text="Charts" />
     </LinearLayout>
+
 
 </RelativeLayout>

@@ -27,7 +27,6 @@ public class MainActivity extends Activity implements MainFragment.Callback{
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
@@ -35,13 +34,16 @@ public class MainActivity extends Activity implements MainFragment.Callback{
 
     @Override
     public void onOpenFirewallButtonPressed() {
-        Intent activity = new Intent(this, dev.ukanth.ufirewall.MainActivity.class);
-        startActivity(activity);
+        startActivity(new Intent(this, dev.ukanth.ufirewall.MainActivity.class));
     }
 
     @Override
     public void onOpenLogsButtonPressed() {
-        Intent activity = new Intent(this, LogActivity.class);
-        startActivity(activity);
+        startActivity( new Intent(this, LogActivity.class));
+    }
+
+    @Override
+    public void onOpenCharts() {
+        startActivity(new Intent(this, ChartActivity.class));
     }
 }

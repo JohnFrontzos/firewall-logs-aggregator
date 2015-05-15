@@ -1,4 +1,4 @@
 include ':core'
 include ':app'
 include ':core:android-lockpattern2'
-include ':core:submodules:ActionBarSherlock:actionbarsherlock'
+include ':core:actionbarsherlock'
