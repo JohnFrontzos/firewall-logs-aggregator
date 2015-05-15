@@ -1,5 +1,9 @@
 # built application files
+*.apk
 *.ap_
+
+# lint folder
+lint
 
 # files for the dex VM
 *.dex
@@ -10,8 +14,12 @@
 # generated files
 bin/
 gen/
-out/
 build/
+classes/
+out/
+
+# maven output folder
+target
 
 # Local configuration file (sdk path, etc)
 local.properties
@@ -19,25 +27,25 @@ local.properties
 # Eclipse project files
 .classpath
 .project
+.metadata
+.settings
 
-# Windows thumbnail db
-.DS_Store
-
-# IDEA/Android Studio project files, because
-# the project can be imported from settings.gradle
+# Android Studio / IntelliJ files
 .idea
 *.iml
-
-# Old-style IDEA project files
-*.ipr
-*.iws
-
-# Local IDEA workspace
 .idea/workspace.xml
 
-# Gradle cache
+# OSX files
+.DS_Store
+
+# Windows files
+Thumbs.db
+
+# backup files
+*.bak
+
+# gradle directory
 .gradle
-
-# Sandbox stuff
-_sandbox
-
+#gradlew
+#gradlew.bat
+#gradle/
