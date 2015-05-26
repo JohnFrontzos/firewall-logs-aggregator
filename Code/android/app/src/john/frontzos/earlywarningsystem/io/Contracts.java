@@ -10,7 +10,7 @@ public class Contracts {
     private static final String ACTION = ".ACTION_";
 
 
-    public class Intents {
+    public interface Intents {
 
         public static final String SYNC_LOG = BASE + ACTION + "SYNC_LOG";
 

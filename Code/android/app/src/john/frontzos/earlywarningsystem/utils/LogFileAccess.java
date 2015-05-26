@@ -1,25 +1,20 @@
 package john.frontzos.earlywarningsystem.utils;
 
 import android.content.Context;
-import android.text.TextUtils;
-import android.util.SparseArray;
 
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.WeakHashMap;
+import java.util.Date;
 
 import dev.ukanth.ufirewall.Api;
 import dev.ukanth.ufirewall.G;
 import dev.ukanth.ufirewall.NflogService;
 import dev.ukanth.ufirewall.RootShell;
-import dev.ukanth.ufirewall.log.LogInfo;
+import io.realm.Realm;
 import io.realm.RealmList;
 import john.frontzos.earlywarningsystem.events.LogDataEvent;
-import john.frontzos.earlywarningsystem.io.model.IpAddress;
 import john.frontzos.earlywarningsystem.io.model.LogRecord;
 import timber.log.Timber;
 
@@ -70,13 +65,16 @@ public class LogFileAccess {
     }
 
     public String parseData(String raw) {
-        String data = LogInfo.parseLog(mContext, raw);
-        parseLogDataFromFirewall(data);
-        return data;
+        RealmList<LogRecord> records = parseLogsFromKernel(raw);
+        Realm realm = Realm.getInstance(mContext);
+        realm.beginTransaction();
+        realm.copyToRealm(records);
+        realm.commitTransaction();
+        return "";
 
     }
 
-    public RealmList<LogRecord> parseLogDataFromFirewall(String data) {
+   /* public RealmList<LogRecord> parseLogDataFromFirewall(String data) {
         RealmList<LogRecord> list = new RealmList<LogRecord>();
         final BufferedReader r = new BufferedReader(new StringReader(data.toString()));
         String line;
@@ -98,7 +96,7 @@ public class LogFileAccess {
                 } else if (((start = line.indexOf("[TCP]")) != -1) && ((end = line.indexOf(")", start)) != -1)) {
                     dst.add(new IpAddress(line.substring(start + 5, end - 3)));
                 } else if (line.contains("---------")) {
-                    if (record.getSource()!=null && TextUtils.isEmpty(record.getSource().getIp())) {
+                    if (record.getSource() != null && TextUtils.isEmpty(record.getSource().getIp())) {
                         record.setSource(new IpAddress("localhost"));
                     }
                     record.setDestination(dst);
@@ -112,7 +110,77 @@ public class LogFileAccess {
         }
 
         return list;
-    }
+    }*/
 
+    public RealmList<LogRecord> parseLogsFromKernel(String dmesg) {
+        final BufferedReader r = new BufferedReader(new StringReader(dmesg.toString()));
+        RealmList<LogRecord> list = new RealmList<LogRecord>();
+        final Integer unknownUID = -11;
+        String line;
+        int start, end;
+        Integer appid;
+        String out, src, dst, proto, spt, dpt, len;
+        LogRecord record = null;
+
+        try {
+            while ((line = r.readLine()) != null) {
+                if (line.indexOf("{AFL}") == -1) continue;
+                appid = unknownUID;
+                if (((start = line.indexOf("UID=")) != -1) && ((end = line.indexOf(" ", start)) != -1)) {
+                    appid = Integer.parseInt(line.substring(start + 4, end));
+                }
+
+                if (record == null) {
+                    record = new LogRecord();
+                }
+
+                //TODO change Real Obj to long ? or to JODA time? I don't know...
+                record.setTimestamp(new Date(DateUtils.getDate(line.substring(1, 13).trim()).getMillis()));
+
+                if (((start = line.indexOf("DST=")) != -1) && ((end = line.indexOf(" ", start)) != -1)) {
+                    dst = line.substring(start + 4, end);
+                    record.setDestination(dst);
+                }
+
+//                if (((start = line.indexOf("DPT=")) != -1) && ((end = line.indexOf(" ", start)) != -1)) {
+//                    dpt = line.substring(start + 4, end);
+//                    record.dpt = dpt;
+//                }
+
+//                if (((start = line.indexOf("SPT=")) != -1) && ((end = line.indexOf(" ", start)) != -1)) {
+//                    spt = line.substring(start + 4, end);
+//                    record.spt = spt;
+//                }
+
+                if (((start = line.indexOf("PROTO=")) != -1) && ((end = line.indexOf(" ", start)) != -1)) {
+                    proto = line.substring(start + 6, end);
+                    record.setProtocol(proto);
+                }
+
+//                if (((start = line.indexOf("LEN=")) != -1) && ((end = line.indexOf(" ", start)) != -1)) {
+//                    len = line.substring(start + 4, end);
+//                    record.len = len;
+//                }
+
+                if (((start = line.indexOf("SRC=")) != -1) && ((end = line.indexOf(" ", start)) != -1)) {
+                    src = line.substring(start + 4, end);
+                    record.setSource(src);
+                }
+
+//                if (((start = line.indexOf("OUT=")) != -1) && ((end = line.indexOf(" ", start)) != -1)) {
+//                    out = line.substring(start + 4, end);
+//                    record.out = out;
+//                }
+
+
+                record.setAppID(appid);
+                list.add(record);
+            }
+        } catch (IOException e) {
+            Timber.e("Log parsing error");
+        }
+        return list;
+
+    }
 
 }

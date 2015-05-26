@@ -13,7 +13,7 @@ import android.view.MenuItem;
 
 import john.frontzos.earlywarningsystem.R;
 
-public class ChartActivity extends Activity implements ChartFragment.OnRefreshData{
+public class ChartActivity extends Activity implements ChartFragment.OnRefreshData {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide fragments for each of the
@@ -36,7 +36,6 @@ public class ChartActivity extends Activity implements ChartFragment.OnRefreshDa
         mAppSectionsPagerAdapter = new DemoCollectionPagerAdapter(getFragmentManager());
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mAppSectionsPagerAdapter);
-
 
 
     }
@@ -69,7 +68,6 @@ public class ChartActivity extends Activity implements ChartFragment.OnRefreshDa
     public void OnRefreshData(Uri uri) {
 
     }
-
 
 
     // Since this is an object collection, use a FragmentStatePagerAdapter,

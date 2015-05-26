@@ -53,7 +53,9 @@ public class LogInfo {
 	String src;
 	String dpt;
 	String timestamp;
-	int totalBlocked; 
+    int appID;
+    String app;
+    int totalBlocked;
 	
 	private HashMap<String, Integer> dstBlocked; // Number of packets blocked per destination IP address
 	private LogInfo() {
@@ -70,6 +72,7 @@ public class LogInfo {
 		Integer appid;
 		String out, src, dst, proto, spt, dpt, len;
 		final SparseArray<LogInfo> map = new SparseArray<LogInfo>();
+        ArrayList<LogInfo> list = new ArrayList<LogInfo>();
 		LogInfo loginfo = null;
 
 		try {
@@ -84,7 +87,9 @@ public class LogInfo {
 				if (loginfo == null) {
 					loginfo = new LogInfo();
 				}
-				
+
+				loginfo.timestamp = line.substring(1,13).trim();
+
 				if (((start=line.indexOf("DST=")) != -1) && ((end=line.indexOf(" ", start)) != -1)) {
 					dst = line.substring(start+4, end);
 					loginfo.dst = dst;
@@ -119,8 +124,14 @@ public class LogInfo {
 					out = line.substring(start+4, end);
 					loginfo.out = out;
 				}
+
+
 				map.put(appid, loginfo);
-				
+
+                //Some hacks to get the list of all blocks
+                loginfo.appID = appid;
+                list.add(loginfo);
+
 				loginfo.totalBlocked += 1;
 				String unique = "[" + loginfo.proto + "]" + loginfo.dst + ":" + loginfo.dpt; 
 				if (loginfo.dstBlocked.containsKey(unique)) {
@@ -187,6 +198,7 @@ public class LogInfo {
 			while ((line = r.readLine()) != null) {
 				if (line.indexOf("{AFL}") == -1) continue;
 				uid = unknownUID;
+
 				if (((start=line.indexOf("UID=")) != -1) && ((end=line.indexOf(" ", start)) != -1)) {
 					uid = Integer.parseInt(line.substring(start+4, end));
 				}

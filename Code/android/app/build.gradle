@@ -9,6 +9,10 @@ dependencies {
     compile 'com.android.support:support-v13:22.0.0'
     compile 'io.realm:realm-android:0.80.2'
 
+    // Joda-Time port for Android
+    compile 'net.danlew:android.joda:2.7.2'
+
+
 }
 
 android {

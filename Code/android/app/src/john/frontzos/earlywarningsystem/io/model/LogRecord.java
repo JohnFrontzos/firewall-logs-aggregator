@@ -1,5 +1,6 @@
 package john.frontzos.earlywarningsystem.io.model;
 
+import java.util.Date;
 import java.util.List;
 
 import io.realm.RealmList;
@@ -11,33 +12,26 @@ import io.realm.annotations.PrimaryKey;
  * @version 1.0.0
  * @since 18/04/2015
  */
-public class LogRecord extends RealmObject{
-    private String name;
+public class LogRecord extends RealmObject {
 
-    @PrimaryKey
     private int appID;
-    private RealmList<IpAddress> destination;
-    private long totalPackages;
-    private IpAddress source;
+    private String name;
+    private String destination;
+    private String source;
+    private String protocol;
+    private Date timestamp;
 
 
     public LogRecord() {
     }
 
-    public LogRecord(String name, int appID, RealmList<IpAddress> destination, long totalPackages, IpAddress source) {
+    public LogRecord(String name, int appID, String destination, String source, String protocol, Date timestamp) {
         this.name = name;
         this.appID = appID;
         this.destination = destination;
-        this.totalPackages = totalPackages;
         this.source = source;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+        this.protocol = protocol;
+        this.timestamp = timestamp;
     }
 
     public int getAppID() {
@@ -48,27 +42,43 @@ public class LogRecord extends RealmObject{
         this.appID = appID;
     }
 
-    public RealmList<IpAddress> getDestination() {
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDestination() {
         return destination;
     }
 
-    public void setDestination(RealmList<IpAddress> destination) {
+    public void setDestination(String destination) {
         this.destination = destination;
     }
 
-    public long getTotalPackages() {
-        return totalPackages;
-    }
-
-    public void setTotalPackages(long totalPackages) {
-        this.totalPackages = totalPackages;
-    }
-
-    public IpAddress getSource() {
+    public String getSource() {
         return source;
     }
 
-    public void setSource(IpAddress source) {
+    public void setSource(String source) {
         this.source = source;
+    }
+
+    public String getProtocol() {
+        return protocol;
+    }
+
+    public void setProtocol(String protocol) {
+        this.protocol = protocol;
+    }
+
+    public Date getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Date timestamp) {
+        this.timestamp = timestamp;
     }
 }
