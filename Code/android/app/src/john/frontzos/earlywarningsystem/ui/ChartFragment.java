@@ -1,6 +1,7 @@
 package john.frontzos.earlywarningsystem.ui;
 
 import android.app.Activity;
+import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -18,7 +19,10 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import butterknife.ButterKnife;
+import io.realm.Realm;
+import io.realm.RealmResults;
 import john.frontzos.earlywarningsystem.R;
+import john.frontzos.earlywarningsystem.io.model.LogRecord;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -62,7 +66,7 @@ public class ChartFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_chart, container, false);
-        ButterKnife.inject(this, view);
+        ButterKnife.bind(this, view);
         chart = (LineChart) view.findViewById(R.id.chart);
         setDummyDataToChart(mParam1);
         return view;
@@ -93,6 +97,7 @@ public class ChartFragment extends Fragment {
     /** Let's try to make a chart with dummy data. */
 
     private void setDummyDataToChart(int fragmentNumber){
+
         LineDataSet data = new LineDataSet(generateData(fragmentNumber), "Apps");
         ArrayList<String> xVals= new ArrayList<String>();
         xVals.add("0");
@@ -110,7 +115,10 @@ public class ChartFragment extends Fragment {
 
     }
 
+
     private  ArrayList<Entry> generateData(int i){
+        getData(getActivity());
+
         ArrayList<Entry>values = new ArrayList<Entry>();
         values.add(new Entry(new Random(Long.valueOf(i)).nextInt(1000),0));
         values.add(new Entry(80, 1));
@@ -118,6 +126,18 @@ public class ChartFragment extends Fragment {
         values.add(new Entry(310, 3));
         values.add(new Entry(340, 4));
         return values;
+    }
+
+    private ArrayList<LogRecord> getData(Context context){
+        ArrayList<LogRecord> list = new ArrayList<>();
+        Realm realm = Realm.getInstance(context);
+        RealmResults<LogRecord> results = realm.where(LogRecord.class)
+                .notEqualTo("appID", -11)
+                .findAll();
+
+        for(LogRecord record: results)
+            list.add(record);
+        return list;
     }
 
 }

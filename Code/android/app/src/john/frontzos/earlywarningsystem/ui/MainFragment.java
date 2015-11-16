@@ -14,8 +14,8 @@ import android.widget.Toast;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 import dev.ukanth.ufirewall.Api;
@@ -29,14 +29,13 @@ import timber.log.Timber;
  * @author Ioannis Frontzos
  * @version 1.0.0
  * @since 21/01/2015
- * @since 21/01/2015 chart button added
  */
 public class MainFragment extends Fragment{
-    @InjectView(R.id.button_logs) Button getLogs;
-    @InjectView(R.id.switch_enable_firewall) Switch enableFirewall;
-    @InjectView(R.id.button_startFirewall)  Button startFirewall;
-    @InjectView(R.id.button_parse_logs) Button parseLogs;
-    @InjectView(R.id.button_chart) Button charts;
+    @Bind(R.id.button_logs) Button getLogs;
+    @Bind(R.id.switch_enable_firewall) Switch enableFirewall;
+    @Bind(R.id.button_startFirewall)  Button startFirewall;
+    @Bind(R.id.button_parse_logs) Button parseLogs;
+    @Bind(R.id.button_chart) Button charts;
 
 
     private Callback mCallback;
@@ -56,7 +55,7 @@ public class MainFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
-        ButterKnife.inject(this, view);
+        ButterKnife.bind(this, view);
         setHasOptionsMenu(true);
         enableFirewall.setChecked(Api.isEnabled(getActivity()));
         return view;

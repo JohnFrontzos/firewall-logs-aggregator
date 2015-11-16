@@ -29,6 +29,11 @@ public class ChartActivity extends Activity implements ChartFragment.OnRefreshDa
      */
     ViewPager mViewPager;
 
+
+    public static final int PERCENTAGE_APP_PIE_CHART = 1;
+    public static final int BLOCKS_PER_TIME_CHART = 2;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +76,7 @@ public class ChartActivity extends Activity implements ChartFragment.OnRefreshDa
 
 
     // Since this is an object collection, use a FragmentStatePagerAdapter,
-// and NOT a FragmentPagerAdapter.
+    // and NOT a FragmentPagerAdapter.
     public class DemoCollectionPagerAdapter extends FragmentPagerAdapter {
         public DemoCollectionPagerAdapter(FragmentManager fm) {
             super(fm);
