@@ -1,4 +1,2 @@
-include ':core'
-include ':app'
-include ':core:android-lockpattern2'
-include ':core:actionbarsherlock'
+include 'app'
+
