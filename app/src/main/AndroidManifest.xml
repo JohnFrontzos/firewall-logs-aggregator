@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="cs.teilar.gr.earlywarningsystem">
+
+    <application
+        android:name="cs.teilar.gr.earlywarningsystem.app.EarlyWarningSystemApp"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name">
+
+        <!--Activities-->
+        <activity android:name="cs.teilar.gr.earlywarningsystem.ui.MainActivity" />
+        <activity android:name="cs.teilar.gr.earlywarningsystem.ui.ChartActivity" />
+        <activity android:name="cs.teilar.gr.earlywarningsystem.ui.SplashActivity" />
+
+        <!-- use an alias in case we want to change the launch activity later without breaking
+            homescreen shortcuts.  Note must be defined after the targetActivity -->
+        <activity-alias
+            android:name=".Launcher"
+            android:label="@string/app_name"
+            android:targetActivity="cs.teilar.gr.earlywarningsystem.ui.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <service android:name=".data.service.AFWallService" />
+
+    </application>
+
+</manifest>
