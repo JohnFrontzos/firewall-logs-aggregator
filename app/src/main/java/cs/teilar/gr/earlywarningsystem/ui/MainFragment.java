@@ -57,14 +57,14 @@ public class MainFragment extends Fragment{
     @Override
     public void onResume() {
         super.onResume();
-        BusProvider.getInstance().register(this);
+        BusProvider.get().register(this);
 
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        BusProvider.getInstance().unregister(this);
+        BusProvider.get().unregister(this);
 
     }
 

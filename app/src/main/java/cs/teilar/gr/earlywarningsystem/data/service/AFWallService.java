@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import com.squareup.otto.Produce;
+
 import org.joda.time.DateTime;
 
 import java.io.BufferedReader;
@@ -12,10 +14,12 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.util.Date;
 
+import cs.teilar.gr.earlywarningsystem.data.event.LogsUpdateEvent;
 import cs.teilar.gr.earlywarningsystem.data.model.Contracts;
 import cs.teilar.gr.earlywarningsystem.data.model.Contracts.Intents;
 import cs.teilar.gr.earlywarningsystem.data.model.FirewallService;
 import cs.teilar.gr.earlywarningsystem.data.model.LogRecord;
+import cs.teilar.gr.earlywarningsystem.util.BusProvider;
 import cs.teilar.gr.earlywarningsystem.util.DateUtils;
 import cs.teilar.gr.earlywarningsystem.util.ShellExecuter;
 import io.realm.Realm;
@@ -30,7 +34,7 @@ import timber.log.Timber;
 public class AFWallService extends IntentService implements FirewallService {
 
     /**
-     * Creates an IntentService.  Invoked by your subclass's constructor.
+     * Creates an IntentService. Invoked by your subclass's constructor.
      **/
     public AFWallService() {
         super("AFWall");
@@ -61,9 +65,13 @@ public class AFWallService extends IntentService implements FirewallService {
 
     @Override
     public RealmList<LogRecord> parseLogs(String raw) {
-        RealmList<LogRecord> records = parseLogsFromKernel(raw);
-        return records;
+        return parseLogsFromKernel(raw, true);
     }
+
+   /* @Produce
+    public String produceUpdate() {
+        return new LogsUpdateEvent();
+    }*/
 
 
     public void storeLogs(RealmList<LogRecord> records) {
@@ -71,9 +79,10 @@ public class AFWallService extends IntentService implements FirewallService {
         realm.beginTransaction();
         realm.copyToRealm(records);
         realm.commitTransaction();
+        BusProvider.get().post(new LogsUpdateEvent(records));
     }
 
-    private RealmList<LogRecord> parseLogsFromKernel(String dmesg) {
+    private RealmList<LogRecord> parseLogsFromKernel(String dmesg, boolean onlyNew) {
         final BufferedReader r = new BufferedReader(new StringReader(dmesg));
         RealmList<LogRecord> list = new RealmList<LogRecord>();
         final Integer unknownUID = -11;
@@ -87,22 +96,26 @@ public class AFWallService extends IntentService implements FirewallService {
             while ((line = r.readLine()) != null) {
                 if (!line.contains("{AFL}")) continue;
                 appid = unknownUID;
+                Date date = null;
 
                 if (record == null) {
                     record = new LogRecord();
                 }
 
                 if (((start = line.indexOf("[")) != -1) && ((end = line.indexOf("]", start)) != -1)) {
-                    Date date = new Date(DateUtils.getDate(line.substring(start + 1, end).trim()).getMillis());
+                    date = new Date(DateUtils.getDate(line.substring(start + 1, end).trim()).getMillis());
+                }
+
+                if (date != null && onlyNew) {
                     if (date.after(getLastUpdateDate())) {
-                        record.setTimestamp(new Date(DateUtils.getDate(line.substring(start + 1, end).trim()).getMillis()));
+                        record.setTimestamp(date);
                     } else {
                         continue;
                     }
-                } else {
-                    continue;
-                }
 
+                } else if (date != null) {
+                    record.setTimestamp(date);
+                }
 
                 if (((start = line.indexOf("UID=")) != -1) && ((end = line.indexOf(" ", start)) != -1)) {
                     appid = Integer.parseInt(line.substring(start + 4, end));

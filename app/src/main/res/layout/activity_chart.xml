@@ -26,7 +26,7 @@
 
    <!-- <fragment
         android:id="@+id/chart_fragment"
-        android:name="cs.teilar.gr.earlywarningsystem.ui.ChartFragment"
+        android:name="cs.teilar.gr.earlywarningsystem.ui.BaseChartFragmentment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:layout="@layout/fragment_chart" />-->

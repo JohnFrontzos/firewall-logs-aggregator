@@ -1,6 +1,5 @@
 package cs.teilar.gr.earlywarningsystem.ui;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.net.Uri;
@@ -13,7 +12,7 @@ import android.view.MenuItem;
 import cs.teilar.gr.earlywarningsystem.R;
 
 
-public class ChartActivity extends BaseActivity implements ChartFragment.OnRefreshData {
+public class ChartActivity extends BaseActivity implements BaseChartFragment.OnRefreshData {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide fragments for each of the
@@ -30,8 +29,8 @@ public class ChartActivity extends BaseActivity implements ChartFragment.OnRefre
     ViewPager mViewPager;
 
 
-    public static final int PERCENTAGE_APP_PIE_CHART = 1;
-    public static final int BLOCKS_PER_TIME_CHART = 2;
+    public static final int PERCENTAGE_APP_PIE_CHART = 0;
+    public static final int BLOCKS_PER_TIME_CHART = 1;
 
 
     @Override
@@ -42,7 +41,6 @@ public class ChartActivity extends BaseActivity implements ChartFragment.OnRefre
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mAppSectionsPagerAdapter);
 
-
     }
 
 
@@ -52,22 +50,6 @@ public class ChartActivity extends BaseActivity implements ChartFragment.OnRefre
         getMenuInflater().inflate(R.menu.menu_chart, menu);
         return true;
     }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
 
     @Override
     public void OnRefreshData(Uri uri) {
@@ -84,12 +66,13 @@ public class ChartActivity extends BaseActivity implements ChartFragment.OnRefre
 
         @Override
         public Fragment getItem(int i) {
-            Fragment fragment = new ChartFragment();
-            Bundle args = new Bundle();
-            // Our object is just an integer :-P
-            args.putInt(ChartFragment.ARG_SECTION_NUMBER, i + 1);
-            fragment.setArguments(args);
-            return fragment;
+            Fragment fragment;
+            switch (i){
+                case PERCENTAGE_APP_PIE_CHART:
+                    return new PieChartFragment();
+                default:
+                    return new BaseChartFragment();
+            }
         }
 
         @Override
@@ -99,7 +82,12 @@ public class ChartActivity extends BaseActivity implements ChartFragment.OnRefre
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return "Chart " + (position + 1);
+            switch (position){
+                case PERCENTAGE_APP_PIE_CHART:
+                    return PieChartFragment.TITLE;
+                default:
+                    return "No Chart";
+            }
         }
     }
 }
