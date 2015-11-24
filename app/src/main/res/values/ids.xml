@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <item type="id" name="afwall_checkbox" />
+    <item type="id" name="firewall1_checkbox" />
+    <item type="id" name="firewall2_checkbox" />
+
+
+</resources>

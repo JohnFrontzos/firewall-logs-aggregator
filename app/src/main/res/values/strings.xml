@@ -8,18 +8,19 @@
     <string name="title_activity_chart">ChartActivity</string>
     <string name="title_pie_chart_fragment">Application Percentage Pie</string>
     <string name="title_wizard_about_fragment">Welcome</string>
-    <string name="title_wizard_firewalls_fragment">Firewalls</string>
-    <string name="title_wizard_finished">Finished!</string>
+    <string name="title_wizard_firewalls_fragment">Setup</string>
+    <string name="title_wizard_finished">Finished</string>
 
     <!-- Wizard -->
     <string name="skip">Skip</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
     <string name="done">Done</string>
-    <string name="wizard_about_app">Early Warning Malware System is an firewall logs aggregator. It collects and parses logs of popular Android open source firewalls and creates useful charts.</string>
+    <string name="wizard_about_app">Early Warning Malware System is an firewall logs aggregator. It collects and parses logs from popular Android open source firewalls and creates useful charts.The minimum recurrent is to have at least a support firewall and the device to be rooted.</string>
     <string name="wizard_firewalls_available">Firewalls available</string>
     <string name="wizard_firewalls_available_text">The app found the firewalls below. Check the firewalls that you want to collect logs.</string>
     <string name="wizard_finished">You are ready! The app will start to collect logs.</string>
+    <string name="wizard_no_firewall_found">No firewall found installed. Would you like to install <b><u>AFWall+</u></b>?</string>
 
     <!-- Main Activity -->
     <string name="open_firewall_button">Open firewall</string>

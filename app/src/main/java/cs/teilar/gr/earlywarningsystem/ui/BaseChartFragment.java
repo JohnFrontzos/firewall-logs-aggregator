@@ -67,26 +67,14 @@ public class BaseChartFragment extends Fragment {
     }
 
 
-    private  ArrayList<Entry> generateData(int i){
-        getData(getActivity());
-
-        ArrayList<Entry>values = new ArrayList<Entry>();
-        values.add(new Entry(new Random(Long.valueOf(i)).nextInt(1000),0));
-        values.add(new Entry(80, 1));
-        values.add(new Entry(300, 2));
-        values.add(new Entry(310, 3));
-        values.add(new Entry(340, 4));
-        return values;
-    }
-
-    private ArrayList<LogRecord> getData(Context context){
+    private ArrayList<LogRecord> getData(Context context) {
         ArrayList<LogRecord> list = new ArrayList<>();
         Realm realm = Realm.getInstance(context);
         RealmResults<LogRecord> results = realm.where(LogRecord.class)
                 .notEqualTo("appID", -11)
                 .findAll();
 
-        for(LogRecord record: results)
+        for (LogRecord record : results)
             list.add(record);
         return list;
     }

@@ -40,12 +40,12 @@ public class EarlyWarningSystemApp extends Application {
                     .build();
 
         } else {
-        Hawk.init(this)
-                .setLogLevel(LogLevel.NONE)
-                .setStorage(HawkBuilder.newSharedPrefStorage(this))
-                .setEncryptionMethod(HawkBuilder.EncryptionMethod.MEDIUM)
-                .setPassword(DeviceUtils.getSimpleUUID(this))
-                .build();
+            Hawk.init(this)
+                    .setLogLevel(LogLevel.NONE)
+                    .setStorage(HawkBuilder.newSharedPrefStorage(this))
+                    .setEncryptionMethod(HawkBuilder.EncryptionMethod.MEDIUM)
+                    .setPassword(DeviceUtils.getSimpleUUID(this))
+                    .build();
         }
 
     }

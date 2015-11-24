@@ -39,25 +39,29 @@
             android:padding="16dp">
 
             <TextView
+                android:id="@+id/title_refresh"
                 style="@android:style/TextAppearance.Medium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:drawableRight="@drawable/ic_refresh_24dp"
                 android:text="@string/wizard_firewalls_available" />
 
-            <CheckBox
-                android:id="@+id/checkbox_firewall"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="AFWall+" />
+            <!-- <CheckBox
+                 android:id="@+id/checkbox_firewall"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="8dp"
+                 android:text="AFWall+" />-->
 
             <TextView
                 android:id="@+id/empty"
                 style="@style/TextAppearance.AppCompat.Medium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:clickable="true"
                 android:gravity="center_horizontal"
-                android:text="@string/empty"
+                android:text="@string/wizard_no_firewall_found"
                 android:visibility="gone" />
 
         </LinearLayout>

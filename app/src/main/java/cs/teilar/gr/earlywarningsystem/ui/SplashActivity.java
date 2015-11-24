@@ -8,7 +8,6 @@ import com.orhanobut.hawk.Hawk;
 import cs.teilar.gr.earlywarningsystem.R;
 import cs.teilar.gr.earlywarningsystem.data.model.Contracts;
 import cs.teilar.gr.earlywarningsystem.data.service.AFWallService;
-import cs.teilar.gr.earlywarningsystem.util.ApplicationUtils;
 
 /**
  * @author Ioannis Frontzos
@@ -25,22 +24,12 @@ public class SplashActivity extends BaseActivity {
         if (Hawk.get(Contracts.Prefs.FIRST_TIME, true)) {
             startActivity(new Intent(this, WizardActivity.class));
         } else {
-            checkFirewallStatus();
-        }
-        finish();
-    }
-
-    // check if firewall is installed and trigger the service
-    void checkFirewallStatus() {
-        if (ApplicationUtils.isPackageInstalled(this, Contracts.PACKAGE_NAME_AFWALL)) {
+            startActivity(new Intent(this, MainActivity.class));
             Intent service = new Intent(this, AFWallService.class);
             service.setAction(Contracts.Intents.SYNC_LOG);
             startService(service);
-            startActivity(new Intent(this, MainActivity.class));
-        } else {
-            // Prompt a message for Firewall installation
-            // ApplicationUtils.openGPlay(Contracts.PACKAGE_NAME_AFWALL);
         }
+        finish();
     }
 }
 
