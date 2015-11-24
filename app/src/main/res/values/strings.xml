@@ -6,7 +6,7 @@
 
     <!-- Titles -->
     <string name="title_activity_chart">ChartActivity</string>
-    <string name="title_pie_chart_fragment">Application Percentage Pie</string>
+    <sµtring name="title_pie_chart_fragment">Application Percentage Pie</sµtring>
     <string name="title_wizard_about_fragment">Welcome</string>
     <string name="title_wizard_firewalls_fragment">Setup</string>
     <string name="title_wizard_finished">Finished</string>

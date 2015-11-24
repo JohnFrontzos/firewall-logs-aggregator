@@ -6,7 +6,6 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.Button;
 
-
 import com.orhanobut.hawk.Hawk;
 
 import butterknife.Bind;
@@ -16,7 +15,6 @@ import cs.teilar.gr.earlywarningsystem.R;
 import cs.teilar.gr.earlywarningsystem.data.model.Contracts;
 import cs.teilar.gr.earlywarningsystem.ui.adapter.WizardPagerAdapter;
 import me.relex.circleindicator.CircleIndicator;
-import timber.log.Timber;
 
 /**
  * @author Ioannis Frontzos

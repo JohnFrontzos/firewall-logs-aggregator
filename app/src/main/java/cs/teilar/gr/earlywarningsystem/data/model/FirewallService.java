@@ -7,9 +7,10 @@ import io.realm.RealmList;
  * @version 1.0.0
  * @since 20/11/2015
  */
-public interface FirewallService{
+public interface FirewallService {
 
     String getLogs();
+
     RealmList<LogRecord> parseLogs(String raw);
 
     /*

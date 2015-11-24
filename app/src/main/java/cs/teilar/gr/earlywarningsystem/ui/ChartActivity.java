@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
-import android.view.MenuItem;
 
 import cs.teilar.gr.earlywarningsystem.R;
 
@@ -67,7 +66,7 @@ public class ChartActivity extends BaseActivity implements BaseChartFragment.OnR
         @Override
         public Fragment getItem(int i) {
             Fragment fragment;
-            switch (i){
+            switch (i) {
                 case PERCENTAGE_APP_PIE_CHART:
                     return new PieChartFragment();
                 default:
@@ -82,7 +81,7 @@ public class ChartActivity extends BaseActivity implements BaseChartFragment.OnR
 
         @Override
         public CharSequence getPageTitle(int position) {
-            switch (position){
+            switch (position) {
                 case PERCENTAGE_APP_PIE_CHART:
                     return PieChartFragment.TITLE;
                 default:

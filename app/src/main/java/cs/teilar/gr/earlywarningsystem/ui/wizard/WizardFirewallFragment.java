@@ -1,7 +1,6 @@
 package cs.teilar.gr.earlywarningsystem.ui.wizard;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -18,7 +17,6 @@ import butterknife.OnClick;
 import cs.teilar.gr.earlywarningsystem.R;
 import cs.teilar.gr.earlywarningsystem.data.model.Contracts;
 import cs.teilar.gr.earlywarningsystem.data.service.AFWallService;
-import cs.teilar.gr.earlywarningsystem.ui.MainActivity;
 import cs.teilar.gr.earlywarningsystem.util.ApplicationUtils;
 
 /**
@@ -53,7 +51,6 @@ public class WizardFirewallFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_wizard_firewalls, container, false);
         ButterKnife.bind(this, v);
-
         populateFirewallList(layout);
         return v;
     }
@@ -64,13 +61,12 @@ public class WizardFirewallFragment extends Fragment {
             addCheckbox(layout, R.id.afwall_checkbox, "AFWall+");
         } else {
             empty.setVisibility(View.VISIBLE);
-            empty.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    installAFWall();
-                }
-            });
         }
+    }
+
+    @OnClick(R.id.empty)
+    public void download() {
+        installAFWall();
     }
 
     @OnClick(R.id.title_refresh)

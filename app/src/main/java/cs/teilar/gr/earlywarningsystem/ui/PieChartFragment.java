@@ -71,12 +71,12 @@ public class PieChartFragment extends Fragment {
 
 
     @Subscribe
-    public void logsUpdateEvent(LogsUpdateEvent event){
+    public void logsUpdateEvent(LogsUpdateEvent event) {
         setData();
         mChart.invalidate();
     }
 
-    void setData(){
+    void setData() {
         mChart.setData(populateData());
     }
 

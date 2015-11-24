@@ -5,9 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
-import butterknife.Bind;
 import butterknife.ButterKnife;
 import cs.teilar.gr.earlywarningsystem.R;
 
@@ -17,7 +15,7 @@ import cs.teilar.gr.earlywarningsystem.R;
  * @since 28/10/2015
  */
 public class WizardFragment extends Fragment {
-    
+
     public static WizardFragment newInstance() {
         return new WizardFragment();
     }

@@ -2,15 +2,14 @@ package cs.teilar.gr.earlywarningsystem.util;
 
 import android.content.Context;
 
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.Date;
 
+import cs.teilar.gr.earlywarningsystem.data.model.LogRecord;
 import io.realm.Realm;
 import io.realm.RealmList;
-import cs.teilar.gr.earlywarningsystem.data.model.LogRecord;
 import timber.log.Timber;
 
 /**

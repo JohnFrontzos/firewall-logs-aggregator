@@ -1,19 +1,16 @@
 package cs.teilar.gr.earlywarningsystem.ui;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
-
-import com.github.mikephil.charting.data.Entry;
 
 import java.util.ArrayList;
-import java.util.Random;
 
+import cs.teilar.gr.earlywarningsystem.data.model.LogRecord;
 import io.realm.Realm;
 import io.realm.RealmResults;
-import cs.teilar.gr.earlywarningsystem.data.model.LogRecord;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -65,7 +62,6 @@ public class BaseChartFragment extends Fragment {
         // TODO: Update argument type and name
         public void OnRefreshData(Uri uri);
     }
-
 
     private ArrayList<LogRecord> getData(Context context) {
         ArrayList<LogRecord> list = new ArrayList<>();

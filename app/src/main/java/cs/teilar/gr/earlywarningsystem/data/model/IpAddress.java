@@ -11,7 +11,7 @@ public class IpAddress extends RealmObject {
 
     private String ip;
 
-    public IpAddress(){
+    public IpAddress() {
 
     }
 

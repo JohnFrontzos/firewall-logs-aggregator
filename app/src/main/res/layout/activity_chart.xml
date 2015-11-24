@@ -6,8 +6,7 @@
     tools:context="cs.teilar.gr.earlywarningsystem.ui.ChartActivity"
     tools:ignore="MergeRootFrame">
 
-    <android.support.v4.view.ViewPager
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.v4.view.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -24,12 +23,12 @@
 
     </android.support.v4.view.ViewPager>
 
-   <!-- <fragment
-        android:id="@+id/chart_fragment"
-        android:name="cs.teilar.gr.earlywarningsystem.ui.BaseChartFragmentment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout="@layout/fragment_chart" />-->
+    <!-- <fragment
+         android:id="@+id/chart_fragment"
+         android:name="cs.teilar.gr.earlywarningsystem.ui.BaseChartFragmentment"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         tools:layout="@layout/fragment_chart" />-->
 
 
 </FrameLayout>

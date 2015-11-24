@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import com.squareup.otto.Produce;
-
 import org.joda.time.DateTime;
 
 import java.io.BufferedReader;
