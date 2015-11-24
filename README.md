@@ -18,5 +18,5 @@ Based on [AFWall+] project, the early warning malware detection system, is a und
 
 ![Alt text][UML]
 
-[UML]:https://bitbucket.org/repo/bgL9j6/images/861665347-Early%20Warning%20System.png "UML schema"
+[UML]:https://github.com/JohnFrontzos/firewall-logs-aggregator/blob/develop/art/Early%20Warning%20System.png "UML schema"
 [AFWall+]:https://github.com/ukanth/afwall
