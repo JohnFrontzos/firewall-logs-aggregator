@@ -20,6 +20,7 @@ public class Contracts {
 
         public static final String FIREWALL_INIT = "isFirewallInitialized";
         public static final String LAST_LOG_INSERTED = "lastLogInserted";
+        public static final String FIRST_TIME = "isFirstTime";
 
     }
 

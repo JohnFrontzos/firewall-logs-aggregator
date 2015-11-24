@@ -1,12 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Early Warning System</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="app_name">Early Warning Malware System</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_chart">ChartActivity</string>
 
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- Titles -->
+    <string name="title_activity_chart">ChartActivity</string>
+    <string name="title_pie_chart_fragment">Application Percentage Pie</string>
+    <string name="title_wizard_about_fragment">Welcome</string>
+    <string name="title_wizard_firewalls_fragment">Firewalls</string>
+    <string name="title_wizard_finished">Finished!</string>
+
+    <!-- Wizard -->
+    <string name="skip">Skip</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="done">Done</string>
+    <string name="wizard_about_app">Early Warning Malware System is an firewall logs aggregator. It collects and parses logs of popular Android open source firewalls and creates useful charts.</string>
+    <string name="wizard_firewalls_available">Firewalls available</string>
+    <string name="wizard_firewalls_available_text">The app found the firewalls below. Check the firewalls that you want to collect logs.</string>
+    <string name="wizard_finished">You are ready! The app will start to collect logs.</string>
+
+    <!-- Main Activity -->
+    <string name="open_firewall_button">Open firewall</string>
+    <string name="open_charts">Open Charts</string>
+    <string name="open_logs">Open Logs</string>
+
+    <!-- Charts Activity -->
+
+    <!-- Others -->
+    <string name="empty">Empty</string>
+
 
 </resources>

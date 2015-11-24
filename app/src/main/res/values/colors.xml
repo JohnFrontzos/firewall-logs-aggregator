@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="primary">#212121</color>
+    <color name="primary_dark">#212121</color>
+    <color name="accent">#FFFF00</color>
+
+    <color name="background">#212121</color>
+    <color name="hint">#FFFF00</color>
+    <color name="error">#cc283e</color>
+
+    <color name="facebook_color">#416BC1</color>
+    <color name="twitter_color">#4099FF</color>
+    <color name="google_color">#DC4E41</color>
+
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="black_alpha_80">#66000000</color>
+    <color name="black_alpha_60">#88000000</color>
+    <color name="grey">#BDBDBD</color>
+    <color name="orange_500">#ff9800</color>
+</resources>

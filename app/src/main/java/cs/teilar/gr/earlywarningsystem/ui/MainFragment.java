@@ -7,15 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Switch;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 import cs.teilar.gr.earlywarningsystem.R;
 import cs.teilar.gr.earlywarningsystem.util.BusProvider;
-import cs.teilar.gr.earlywarningsystem.util.LogFileAccess;
 import timber.log.Timber;
 
 /**
@@ -23,13 +20,12 @@ import timber.log.Timber;
  * @version 1.0.0
  * @since 21/01/2015
  */
-public class MainFragment extends Fragment{
-    @Bind(R.id.button_logs) Button getLogs;
-    @Bind(R.id.switch_enable_firewall) Switch enableFirewall;
-    @Bind(R.id.button_startFirewall)  Button startFirewall;
-    @Bind(R.id.button_parse_logs) Button parseLogs;
-    @Bind(R.id.button_chart) Button charts;
+public class MainFragment extends Fragment {
 
+
+    @Bind(R.id.button_startFirewall) Button buttonStartFirewall;
+    @Bind(R.id.button_chart) Button buttonCharts;
+    @Bind(R.id.button_logs) Button buttonLogs;
 
     private Callback mCallback;
 
@@ -50,7 +46,6 @@ public class MainFragment extends Fragment{
         View view = inflater.inflate(R.layout.fragment_main, container, false);
         ButterKnife.bind(this, view);
         setHasOptionsMenu(true);
-        //enableFirewall.setChecked(Api.isEnabled(getActivity()));
         return view;
     }
 
@@ -69,56 +64,38 @@ public class MainFragment extends Fragment{
     }
 
     @OnClick(R.id.button_startFirewall)
-    void onStartFirewall(){
+    void onStartFirewall() {
         mCallback.onOpenFirewallButtonPressed();
-
     }
 
     @OnClick(R.id.button_chart)
-    void onChartClicked(){
+    void onChartClicked() {
         mCallback.onOpenCharts();
-
     }
-
-    @OnClick(R.id.button_parse_logs)
-    void setParseLogs(){
-        LogFileAccess log = new LogFileAccess(getActivity());
-        log.populateData();
-        log.parseData(log.getmData());
-
-    }
-
 
     @OnClick(R.id.button_logs)
-    void onOpenLogs(){
+    void onOpenLogs() {
         mCallback.onOpenLogsButtonPressed();
-
     }
-
-    @OnCheckedChanged(R.id.switch_enable_firewall)
-    void onChecked(boolean checked) {
-        //       Api.setEnabled(getActivity(), checked,true);
-        //     Api.setLogging(getActivity(), checked);
-    }
-
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
-                mCallback = (Callback) activity;
-            } catch (ClassCastException e) {
-                Timber.w(e, "%s must implement fragment's callbacks.", activity.getLocalClassName());
-            }
+            mCallback = (Callback) activity;
+        } catch (ClassCastException e) {
+            Timber.w(e, "%s must implement fragment's callbacks.", activity.getLocalClassName());
         }
+    }
 
     public interface Callback {
         public void onOpenFirewallButtonPressed();
+
         public void onOpenLogsButtonPressed();
+
         public void onOpenCharts();
 
     }
-
 
 
 }

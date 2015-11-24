@@ -4,4 +4,9 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
+    <!-- Wizard -->
+    <dimen name="wizard_horizontal_margin">32dp</dimen>
+    <dimen name="wizard_top_margin">64dp</dimen>
+
+
 </resources>
