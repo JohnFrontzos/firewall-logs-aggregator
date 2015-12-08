@@ -2,16 +2,19 @@ package cs.teilar.gr.earlywarningsystem.ui;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.squareup.otto.Subscribe;
 
@@ -36,7 +39,6 @@ public class PieChartFragment extends Fragment {
 
     public static String TITLE = "Applications Blocked";
 
-
     @Bind(R.id.chart) PieChart mChart;
 
     @Override
@@ -50,11 +52,34 @@ public class PieChartFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        mChart.setUsePercentValues(true);
+        mChart.setDescription("");
+        mChart.setExtraOffsets(5, 10, 5, 5);
+        mChart.setDrawHoleEnabled(true);
+        mChart.setHoleColorTransparent(true);
+
+        mChart.setTransparentCircleColor(Color.WHITE);
+        mChart.setTransparentCircleAlpha(110);
+
+        mChart.setHoleRadius(58f);
+        mChart.setTransparentCircleRadius(61f);
+
+        mChart.setDrawCenterText(true);
+        mChart.setHighlightPerTapEnabled(true);
+
+        mChart.setRotationEnabled(false);
+
         setData();
-        Legend legend = mChart.getLegend();
-        legend.setEnabled(false);
 
+        mChart.animateY(1400, Easing.EasingOption.EaseInOutQuad);
+        // mChart.spin(2000, 0, 360);
 
+        Legend l = mChart.getLegend();
+        l.setPosition(Legend.LegendPosition.PIECHART_CENTER);
+        l.setXEntrySpace(7f);
+        l.setYEntrySpace(0f);
+        l.setYOffset(0f);
     }
 
     @Override
@@ -78,10 +103,11 @@ public class PieChartFragment extends Fragment {
 
     void setData() {
         mChart.setData(populateData());
+        mChart.highlightValues(null);
     }
 
     PieData populateData() {
-        LinkedHashMap<Integer, Float> map = getMapOfApps(getDB(getActivity()));
+        LinkedHashMap<String, Float> map = getMapOfApps(getDB(getActivity()));
         if (map.size() == 0) {
             return null;
         }
@@ -89,14 +115,20 @@ public class PieChartFragment extends Fragment {
         ArrayList<String> labels = new ArrayList<>(map.size());
         ArrayList<Entry> values = new ArrayList<>(map.size());
 
-        for (Integer key : map.keySet()) {
+        for (String key : map.keySet()) {
             labels.add(String.valueOf(key));
             values.add(new Entry(map.get(key), labels.size() - 1));
         }
+        PieDataSet dataSet = new PieDataSet(values, "Apps");
+        dataSet.setSliceSpace(2f);
+        dataSet.setSelectionShift(5f);
+        dataSet.setColors(ColorTemplate.PASTEL_COLORS);
 
         PieData data = new PieData(labels.toArray(new String[labels.size()]));
-        PieDataSet dataSet = new PieDataSet(values, "test");
-        dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+        data.setValueFormatter(new PercentFormatter());
+        data.setValueTextSize(11f);
+        data.setValueTextColor(Color.WHITE);
+
         data.setDataSet(dataSet);
         return data;
     }
@@ -105,20 +137,19 @@ public class PieChartFragment extends Fragment {
         ArrayList<LogRecord> list = new ArrayList<>();
         Realm realm = Realm.getInstance(context);
         RealmResults<LogRecord> results = realm.where(LogRecord.class)
-                .notEqualTo("appID", -11)
                 .findAll();
         list.addAll(results);
         return list;
     }
 
-    private LinkedHashMap<Integer, Float> getMapOfApps(ArrayList<LogRecord> list) {
-        LinkedHashMap<Integer, Float> map = new LinkedHashMap<>();
+    private LinkedHashMap<String, Float> getMapOfApps(ArrayList<LogRecord> list) {
+        LinkedHashMap<String, Float> map = new LinkedHashMap<>();
         for (LogRecord record : list) {
-            int id = record.getAppID();
-            if (map.containsKey(id)) {
-                map.put(id, map.get(id) + 1);
+            String name = record.getName();
+            if (map.containsKey(name)) {
+                map.put(name, map.get(name) + 1);
             } else {
-                map.put(id, (float) 1);
+                map.put(name, (float) 1);
             }
         }
         return map;

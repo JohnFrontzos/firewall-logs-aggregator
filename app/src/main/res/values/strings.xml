@@ -16,7 +16,7 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
     <string name="done">Done</string>
-    <string name="wizard_about_app">Early Warning Malware System is an firewall logs aggregator. It collects and parses logs from popular Android open source firewalls and creates useful charts.The minimum recurrent is to have at least a support firewall and the device to be rooted.</string>
+    <string name="wizard_about_app">Early Warning Malware System is an firewall logs aggregator. It collects and parses logs from popular Android open source firewalls and creates useful charts.The minimum requirement is to have at least a support firewall and the device to be rooted.</string>
     <string name="wizard_firewalls_available">Firewalls available</string>
     <string name="wizard_firewalls_available_text">The app found the firewalls below. Check the firewalls that you want to collect logs.</string>
     <string name="wizard_finished">You are ready! The app will start to collect logs.</string>

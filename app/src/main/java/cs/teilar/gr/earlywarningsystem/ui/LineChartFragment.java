@@ -78,7 +78,7 @@ public class LineChartFragment extends Fragment implements OnChartValueSelectedL
         // set an alternative background color
         // mChart.setBackgroundColor(Color.GRAY);
 
-        LimitLine ll1 = new LimitLine(130f, "Upper Limit");
+       /* LimitLine ll1 = new LimitLine(130f, "Upper Limit");
         ll1.setLineWidth(4f);
         ll1.enableDashedLine(10f, 10f, 0f);
         ll1.setLabelPosition(LimitLine.LimitLabelPosition.RIGHT_TOP);
@@ -88,7 +88,7 @@ public class LineChartFragment extends Fragment implements OnChartValueSelectedL
         ll2.setLineWidth(4f);
         ll2.enableDashedLine(10f, 10f, 0f);
         ll2.setLabelPosition(LimitLine.LimitLabelPosition.RIGHT_BOTTOM);
-        ll2.setTextSize(10f);
+        ll2.setTextSize(10f);*/
 
         setData();
 

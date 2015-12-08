@@ -3,6 +3,7 @@ package cs.teilar.gr.earlywarningsystem.data.service;
 import android.app.IntentService;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
 import android.preference.PreferenceManager;
 
 import org.joda.time.DateTime;
@@ -10,13 +11,14 @@ import org.joda.time.DateTime;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
-import java.util.Date;
+import java.util.List;
 
 import cs.teilar.gr.earlywarningsystem.data.event.LogsUpdateEvent;
 import cs.teilar.gr.earlywarningsystem.data.model.Contracts;
 import cs.teilar.gr.earlywarningsystem.data.model.Contracts.Intents;
 import cs.teilar.gr.earlywarningsystem.data.model.FirewallService;
 import cs.teilar.gr.earlywarningsystem.data.model.LogRecord;
+import cs.teilar.gr.earlywarningsystem.util.ApplicationUtils;
 import cs.teilar.gr.earlywarningsystem.util.BusProvider;
 import cs.teilar.gr.earlywarningsystem.util.DateUtils;
 import cs.teilar.gr.earlywarningsystem.util.ShellExecuter;
@@ -44,6 +46,7 @@ public class AFWallService extends IntentService implements FirewallService {
             switch (intent.getAction()) {
                 case Intents.SYNC_LOG:
                     syncLogs();
+                    setLastUpdateDate();
                     break;
             }
         }
@@ -82,23 +85,20 @@ public class AFWallService extends IntentService implements FirewallService {
 
     private RealmList<LogRecord> parseLogsFromKernel(String dmesg, boolean onlyNew) {
         final BufferedReader r = new BufferedReader(new StringReader(dmesg));
-        RealmList<LogRecord> list = new RealmList<LogRecord>();
+        RealmList<LogRecord> list = new RealmList<>();
         final Integer unknownUID = -11;
         String line;
         int start, end;
-        Integer appid;
         String out, src, dst, proto, spt, dpt, len;
-        LogRecord record = null;
+        List<ApplicationInfo> applications = ApplicationUtils.getApplicationList(this);
 
         try {
             while ((line = r.readLine()) != null) {
                 if (!line.contains("{AFL}")) continue;
-                appid = unknownUID;
+                Integer appid = unknownUID;
                 DateTime date = null;
 
-                if (record == null) {
-                    record = new LogRecord();
-                }
+                LogRecord record = new LogRecord();
 
                 if (((start = line.indexOf("[")) != -1) && ((end = line.indexOf("]", start)) != -1)) {
                     date = new DateTime(DateUtils.getDate(line.substring(start + 1, end).trim()).getMillis());
@@ -117,6 +117,16 @@ public class AFWallService extends IntentService implements FirewallService {
 
                 if (((start = line.indexOf("UID=")) != -1) && ((end = line.indexOf(" ", start)) != -1)) {
                     appid = Integer.parseInt(line.substring(start + 4, end));
+                    record.setAppID(appid);
+
+                    for (ApplicationInfo app : applications) {
+                        if (app.uid == appid) {
+                            String name = getPackageManager().getApplicationLabel(app).toString();
+                            Timber.d("App ID: %d App Name: %s", appid, name);
+                            record.setName(name);
+                            break;
+                        }
+                    }
                 }
 
 
@@ -154,9 +164,6 @@ public class AFWallService extends IntentService implements FirewallService {
 //                    out = line.substring(start + 4, end);
 //                    record.out = out;
 //                }
-
-
-                record.setAppID(appid);
                 list.add(record);
             }
         } catch (IOException e) {
@@ -168,7 +175,12 @@ public class AFWallService extends IntentService implements FirewallService {
 
     private DateTime getLastUpdateDate() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        return new DateTime(prefs.getString(Contracts.Prefs.LAST_LOG_INSERTED, "0"));
+        return new DateTime(prefs.getLong(Contracts.Prefs.LAST_LOG_INSERTED, 0));
+    }
+
+    private void setLastUpdateDate() {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        prefs.edit().putLong(Contracts.Prefs.LAST_LOG_INSERTED, DateTime.now().getMillis()).apply();
     }
 
 }

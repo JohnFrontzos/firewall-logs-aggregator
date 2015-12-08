@@ -10,6 +10,7 @@ import net.danlew.android.joda.JodaTimeAndroid;
 
 import cs.teilar.gr.earlywarningsystem.BuildConfig;
 import cs.teilar.gr.earlywarningsystem.util.DeviceUtils;
+import timber.log.Timber;
 
 /**
  * @author Ioannis Frontzos
@@ -22,6 +23,10 @@ public class EarlyWarningSystemApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        if (BuildConfig.DEBUG) {
+            Timber.plant(new Timber.DebugTree());
+        }
 
         // Initialize Hawk
         initHawk();

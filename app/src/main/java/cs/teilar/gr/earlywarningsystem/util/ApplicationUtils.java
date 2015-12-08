@@ -2,8 +2,12 @@ package cs.teilar.gr.earlywarningsystem.util;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Ioannis Frontzos
@@ -20,6 +24,11 @@ public class ApplicationUtils {
         } catch (PackageManager.NameNotFoundException e) {
             return false;
         }
+    }
+
+    public static List<ApplicationInfo> getApplicationList(Context context){
+        PackageManager pkgmanager = context.getPackageManager();
+        return pkgmanager.getInstalledApplications(PackageManager.GET_META_DATA);
     }
 
     public static Intent openGPlay(String packageName) {
