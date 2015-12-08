@@ -1,5 +1,7 @@
 package cs.teilar.gr.earlywarningsystem.data.model;
 
+import org.joda.time.DateTime;
+
 import java.util.Date;
 
 import io.realm.RealmObject;
@@ -16,13 +18,13 @@ public class LogRecord extends RealmObject {
     private String destination;
     private String source;
     private String protocol;
-    private Date timestamp;
+    private long timestamp;
 
 
     public LogRecord() {
     }
 
-    public LogRecord(String name, int appID, String destination, String source, String protocol, Date timestamp) {
+    public LogRecord(String name, int appID, String destination, String source, String protocol, long timestamp) {
         this.name = name;
         this.appID = appID;
         this.destination = destination;
@@ -71,11 +73,11 @@ public class LogRecord extends RealmObject {
         this.protocol = protocol;
     }
 
-    public Date getTimestamp() {
+    public long getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(Date timestamp) {
+    public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
     }
 }

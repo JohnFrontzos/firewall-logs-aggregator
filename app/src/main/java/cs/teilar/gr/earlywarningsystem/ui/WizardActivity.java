@@ -107,6 +107,7 @@ public class WizardActivity extends BaseActivity implements ViewPager.OnPageChan
         finish();
     }
 
+
     @Override
     public void onPageScrollStateChanged(int state) {
 

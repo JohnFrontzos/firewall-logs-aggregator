@@ -46,7 +46,7 @@ public class ChartActivity extends BaseActivity implements BaseChartFragment.OnR
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_chart, menu);
+        getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
@@ -69,6 +69,8 @@ public class ChartActivity extends BaseActivity implements BaseChartFragment.OnR
             switch (i) {
                 case PERCENTAGE_APP_PIE_CHART:
                     return new PieChartFragment();
+                case BLOCKS_PER_TIME_CHART:
+                    return new LineChartFragment();
                 default:
                     return new BaseChartFragment();
             }
@@ -83,7 +85,9 @@ public class ChartActivity extends BaseActivity implements BaseChartFragment.OnR
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case PERCENTAGE_APP_PIE_CHART:
-                    return PieChartFragment.TITLE;
+                    return getString(R.string.title_pie_chart_fragment);
+                case BLOCKS_PER_TIME_CHART:
+                    return getString(R.string.title_line_chart_fragment);
                 default:
                     return "No Chart";
             }

@@ -30,6 +30,7 @@ public class WizardFirewallFragment extends Fragment {
     @Bind(R.id.empty) TextView empty;
 
 
+
     public static WizardFirewallFragment newInstance() {
         return new WizardFirewallFragment();
     }

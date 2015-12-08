@@ -2,11 +2,11 @@
 <resources>
 
     <string name="app_name">Early Warning Malware System</string>
-    <string name="action_settings">Settings</string>
 
     <!-- Titles -->
     <string name="title_activity_chart">ChartActivity</string>
-    <sµtring name="title_pie_chart_fragment">Application Percentage Pie</sµtring>
+    <string name="title_pie_chart_fragment">Application Percentage Pie</string>
+    <string name="title_line_chart_fragment">Applications Blocked per day</string>
     <string name="title_wizard_about_fragment">Welcome</string>
     <string name="title_wizard_firewalls_fragment">Setup</string>
     <string name="title_wizard_finished">Finished</string>
@@ -28,6 +28,11 @@
     <string name="open_logs">Open Logs</string>
 
     <!-- Charts Activity -->
+
+
+    <!-- Actions Activity -->
+    <string name="action_settings">Settings</string>
+    <string name="action_fetch_logs">Fetch Logs</string>
 
     <!-- Others -->
     <string name="empty">Empty</string>

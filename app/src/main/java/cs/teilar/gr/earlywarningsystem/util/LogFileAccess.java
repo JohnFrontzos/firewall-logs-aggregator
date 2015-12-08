@@ -2,6 +2,8 @@ package cs.teilar.gr.earlywarningsystem.util;
 
 import android.content.Context;
 
+import org.joda.time.DateTime;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
@@ -112,7 +114,7 @@ public class LogFileAccess {
 
                 //TODO change Real Obj to long ? or to JODA time? I don't know...
                 if (((start = line.indexOf("[ ")) != -1) && ((end = line.indexOf("]", start)) != -1)) {
-                    record.setTimestamp(new Date(DateUtils.getDate(line.substring(start + 1, end).trim()).getMillis()));
+                    record.setTimestamp(DateUtils.getDate(line.substring(start + 1, end).trim()).getMillis());
                 }
 
                 if (((start = line.indexOf("DST=")) != -1) && ((end = line.indexOf(" ", start)) != -1)) {

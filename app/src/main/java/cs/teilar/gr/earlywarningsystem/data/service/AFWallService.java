@@ -94,25 +94,25 @@ public class AFWallService extends IntentService implements FirewallService {
             while ((line = r.readLine()) != null) {
                 if (!line.contains("{AFL}")) continue;
                 appid = unknownUID;
-                Date date = null;
+                DateTime date = null;
 
                 if (record == null) {
                     record = new LogRecord();
                 }
 
                 if (((start = line.indexOf("[")) != -1) && ((end = line.indexOf("]", start)) != -1)) {
-                    date = new Date(DateUtils.getDate(line.substring(start + 1, end).trim()).getMillis());
+                    date = new DateTime(DateUtils.getDate(line.substring(start + 1, end).trim()).getMillis());
                 }
 
                 if (date != null && onlyNew) {
-                    if (date.after(getLastUpdateDate())) {
-                        record.setTimestamp(date);
+                    if (date.isAfter(getLastUpdateDate())) {
+                        record.setTimestamp(date.getMillis());
                     } else {
                         continue;
                     }
 
                 } else if (date != null) {
-                    record.setTimestamp(date);
+                    record.setTimestamp(date.getMillis());
                 }
 
                 if (((start = line.indexOf("UID=")) != -1) && ((end = line.indexOf(" ", start)) != -1)) {
@@ -166,9 +166,9 @@ public class AFWallService extends IntentService implements FirewallService {
 
     }
 
-    private Date getLastUpdateDate() {
+    private DateTime getLastUpdateDate() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        return new DateTime(prefs.getString(Contracts.Prefs.LAST_LOG_INSERTED, "0")).toDate();
+        return new DateTime(prefs.getString(Contracts.Prefs.LAST_LOG_INSERTED, "0"));
     }
 
 }
