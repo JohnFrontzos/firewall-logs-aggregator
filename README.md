@@ -5,13 +5,10 @@ Based on [AFWall+] project, the early warning malware detection system, is a und
 
 ## TODO  
 
-* Analyze and Create custom scripts for IPTABLES rules
-* ~~Submodule the AFWall~~
-* ~~Check the log file's implemation of AFWALL+ ~~
-* Create a plugin for capturing the entries of the log file
-* Calculate the data that PROTOS server needs
-* REST client side communication
-* [optional] Create backend's REST API
+* ~~Detach Submodule the AFWall~~
+* ~~Check the log file's implementation of AFWALL+~~
+* ~~Create a plugin for capturing the entries of the log file~~
+* [optional] Create REST API
 
 
 ## App Basic Schema  
