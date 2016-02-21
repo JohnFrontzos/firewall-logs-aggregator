@@ -13,6 +13,7 @@ public class Contracts {
     public interface Intents {
 
         public static final String SYNC_LOG = BASE + ACTION + "SYNC_LOG";
+        public static final String APPLICATION_INTENT = BASE + ACTION + "APPLICATION_INTENT";
 
     }
 

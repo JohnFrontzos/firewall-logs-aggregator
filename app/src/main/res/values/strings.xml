@@ -26,6 +26,7 @@
     <string name="open_firewall_button">Open firewall</string>
     <string name="open_charts">Open Charts</string>
     <string name="open_logs">Open Logs</string>
+    <string name="open_wizard">Open Wizard</string>
 
     <!-- Charts Activity -->
 

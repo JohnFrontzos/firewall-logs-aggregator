@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.util.List;
 
+import cs.teilar.gr.earlywarningsystem.data.event.FirewallApplicationIntent;
 import cs.teilar.gr.earlywarningsystem.data.event.LogsUpdateEvent;
 import cs.teilar.gr.earlywarningsystem.data.model.Contracts;
 import cs.teilar.gr.earlywarningsystem.data.model.Contracts.Intents;
@@ -48,6 +49,9 @@ public class AFWallService extends IntentService implements FirewallService {
                     syncLogs();
                     setLastUpdateDate();
                     break;
+                case Intents.APPLICATION_INTENT:
+                    BusProvider.get().post(new FirewallApplicationIntent(getApplicationIntent()));
+                    break;
             }
         }
     }
@@ -69,7 +73,13 @@ public class AFWallService extends IntentService implements FirewallService {
         return parseLogsFromKernel(raw, true);
     }
 
-   /* @Produce
+    @Override
+    public Intent getApplicationIntent() {
+        Intent intent = getPackageManager().getLaunchIntentForPackage("dev.ukanth.ufirewall");
+        return intent;
+    }
+
+    /* @Produce
     public String produceUpdate() {
         return new LogsUpdateEvent();
     }*/

@@ -1,5 +1,7 @@
 package cs.teilar.gr.earlywarningsystem.data.model;
 
+import android.content.Intent;
+
 import io.realm.RealmList;
 
 /**
@@ -13,6 +15,7 @@ public interface FirewallService {
 
     RealmList<LogRecord> parseLogs(String raw);
 
+    Intent getApplicationIntent();
     /*
     public boolean isFirewallInstalled();
     public Intent downloadApp();*/

@@ -4,7 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 
+import com.squareup.otto.Subscribe;
+
 import cs.teilar.gr.earlywarningsystem.R;
+import cs.teilar.gr.earlywarningsystem.data.event.FirewallApplicationIntent;
+import cs.teilar.gr.earlywarningsystem.data.model.Contracts;
+import cs.teilar.gr.earlywarningsystem.data.service.AFWallService;
+import cs.teilar.gr.earlywarningsystem.util.BusProvider;
 
 
 public class MainActivity extends BaseActivity implements MainFragment.Callback {
@@ -22,11 +28,24 @@ public class MainActivity extends BaseActivity implements MainFragment.Callback 
         return true;
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        BusProvider.get().unregister(this);
+    }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        BusProvider.get().register(this);
+    }
+
+    // TODO: 21/2/16 need to pick firewall from service
+    @Override
     public void onOpenFirewallButtonPressed() {
-        Intent launchIntent = getPackageManager().getLaunchIntentForPackage("dev.ukanth.ufirewall");
-        startActivity(launchIntent);
+        Intent service = new Intent(this, AFWallService.class);
+        service.setAction(Contracts.Intents.APPLICATION_INTENT);
+        startService(service);
     }
 
     @Override
@@ -35,7 +54,18 @@ public class MainActivity extends BaseActivity implements MainFragment.Callback 
     }
 
     @Override
+    public void onOpenWizardButtonPressed() {
+        startActivity(new Intent(this, WizardActivity.class));
+    }
+
+    @Override
     public void onOpenCharts() {
         startActivity(new Intent(this, ChartActivity.class));
     }
+
+    @Subscribe
+    public void getFirewallIntent(FirewallApplicationIntent intent){
+        startActivity(intent.getIntent());
+    }
+
 }

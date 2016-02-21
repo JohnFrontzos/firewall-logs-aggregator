@@ -6,9 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
-import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cs.teilar.gr.earlywarningsystem.R;
@@ -21,11 +19,6 @@ import timber.log.Timber;
  * @since 21/01/2015
  */
 public class MainFragment extends Fragment {
-
-
-    @Bind(R.id.button_startFirewall) Button buttonStartFirewall;
-    @Bind(R.id.button_chart) Button buttonCharts;
-    @Bind(R.id.button_logs) Button buttonLogs;
 
     private Callback mCallback;
 
@@ -78,6 +71,10 @@ public class MainFragment extends Fragment {
         mCallback.onOpenLogsButtonPressed();
     }
 
+    @OnClick(R.id.button_wizard)
+    void onOpenWizard() {mCallback.onOpenWizardButtonPressed();
+    }
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -94,6 +91,8 @@ public class MainFragment extends Fragment {
         public void onOpenLogsButtonPressed();
 
         public void onOpenCharts();
+
+        public void onOpenWizardButtonPressed();
 
     }
 

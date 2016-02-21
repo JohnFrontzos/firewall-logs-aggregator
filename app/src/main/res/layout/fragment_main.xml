@@ -28,5 +28,10 @@
         android:layout_height="wrap_content"
         android:text="@string/open_logs" />
 
+    <Button
+        android:id="@+id/button_wizard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/open_wizard" />
 
 </LinearLayout>
