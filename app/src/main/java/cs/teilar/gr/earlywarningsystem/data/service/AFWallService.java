@@ -61,7 +61,6 @@ public class AFWallService extends IntentService implements FirewallService {
         storeLogs(parseLogs(raw));
     }
 
-
     @Override
     public String getLogs() {
         ShellExecuter shell = new ShellExecuter();
@@ -75,15 +74,8 @@ public class AFWallService extends IntentService implements FirewallService {
 
     @Override
     public Intent getApplicationIntent() {
-        Intent intent = getPackageManager().getLaunchIntentForPackage("dev.ukanth.ufirewall");
-        return intent;
+        return getPackageManager().getLaunchIntentForPackage("dev.ukanth.ufirewall");
     }
-
-    /* @Produce
-    public String produceUpdate() {
-        return new LogsUpdateEvent();
-    }*/
-
 
     public void storeLogs(RealmList<LogRecord> records) {
         Realm realm = Realm.getInstance(this);
@@ -99,7 +91,7 @@ public class AFWallService extends IntentService implements FirewallService {
         final Integer unknownUID = -11;
         String line;
         int start, end;
-        String out, src, dst, proto, spt, dpt, len;
+        String src, dst, proto;
         List<ApplicationInfo> applications = ApplicationUtils.getApplicationList(this);
 
         try {
@@ -145,35 +137,17 @@ public class AFWallService extends IntentService implements FirewallService {
                     record.setDestination(dst);
                 }
 
-//                if (((start = line.indexOf("DPT=")) != -1) && ((end = line.indexOf(" ", start)) != -1)) {
-//                    dpt = line.substring(start + 4, end);
-//                    record.dpt = dpt;
-//                }
-
-//                if (((start = line.indexOf("SPT=")) != -1) && ((end = line.indexOf(" ", start)) != -1)) {
-//                    spt = line.substring(start + 4, end);
-//                    record.spt = spt;
-//                }
-
                 if (((start = line.indexOf("PROTO=")) != -1) && ((end = line.indexOf(" ", start)) != -1)) {
                     proto = line.substring(start + 6, end);
                     record.setProtocol(proto);
                 }
 
-//                if (((start = line.indexOf("LEN=")) != -1) && ((end = line.indexOf(" ", start)) != -1)) {
-//                    len = line.substring(start + 4, end);
-//                    record.len = len;
-//                }
 
                 if (((start = line.indexOf("SRC=")) != -1) && ((end = line.indexOf(" ", start)) != -1)) {
                     src = line.substring(start + 4, end);
                     record.setSource(src);
                 }
 
-//                if (((start = line.indexOf("OUT=")) != -1) && ((end = line.indexOf(" ", start)) != -1)) {
-//                    out = line.substring(start + 4, end);
-//                    record.out = out;
-//                }
                 list.add(record);
             }
         } catch (IOException e) {

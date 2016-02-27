@@ -16,8 +16,5 @@ public interface FirewallService {
     RealmList<LogRecord> parseLogs(String raw);
 
     Intent getApplicationIntent();
-    /*
-    public boolean isFirewallInstalled();
-    public Intent downloadApp();*/
 
 }

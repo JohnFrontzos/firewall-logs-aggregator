@@ -64,7 +64,7 @@ public class MainActivity extends BaseActivity implements MainFragment.Callback 
     }
 
     @Subscribe
-    public void getFirewallIntent(FirewallApplicationIntent intent){
+    public void getFirewallIntent(FirewallApplicationIntent intent) {
         startActivity(intent.getIntent());
     }
 
